@@ -1,30 +1,29 @@
 function myGet(obj, path, defaultValue) {
   if (typeof path === "string") {
-    path = path
-      .replace(/([\[\]])/g, ($1) => {
-        return $1 === "[" ? "." : ""
-      })
-      .split(".")
+    let arr = path.split(".")
+    path = arr.flatMap((p) => {
+      if (p.includes("[")) {
+        let [key, index] = p.split("[")
+        index = index.replace("]", "")
+        return [key, index]
+      } else return p
+    })
   }
 
-  if (
-    !obj ||
-    typeof obj !== "object" ||
-    !Array.isArray(path) ||
-    path.length === 0
-  ) {
-    return path.length === 0 ? obj : defaultValue
-  }
+  if (!path.length) return obj
+  if (typeof obj !== "object") return defaultValue
 
   let target = obj
   for (const item of path) {
     target = target[item]
     if (!target) break
   }
-
-  return target || defaultValue
+  return target ? target : defaultValue
 }
 
 const testObj = { a: [{ b: { c: 3 } }] }
 
 console.log(myGet(testObj, "a[0].b.c", 1))
+
+const testObj2 = { a: { b: { c: 1 } } }
+console.log(myGet(testObj2, "a.b.c", 3))
