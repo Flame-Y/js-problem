@@ -23,10 +23,10 @@ const searchInsert = function (nums, target) {
   const n = nums.length
   let l = 0,
     r = n - 1
-  while (l < r) {
+  while (l <= r) {
     let mid = Math.floor((l + r) / 2)
     if (nums[mid] < target) l = mid + 1
-    else r = mid
+    else r = mid - 1
   }
   return l
 }

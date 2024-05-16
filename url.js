@@ -7,12 +7,12 @@ function parseParam(url) {
   const params = new URLSearchParams(queryString)
   const parsedParams = {}
   for (let [key, value] of params.entries()) {
-    let pattern = /^\d+$/
-    if (value === "") {
-      value = true
-    } else if (pattern.test(value)) {
-      value = Number(value)
-    }
+    // let pattern = /^\d+$/
+    // if (value === "") {
+    //   value = true
+    // } else if (pattern.test(value)) {
+    //   value = Number(value)
+    // }
     if (parsedParams.hasOwnProperty(key)) {
       if (Array.isArray(parsedParams[key])) {
         parsedParams[key].push(value)
