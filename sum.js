@@ -13,3 +13,5 @@ const curry = (fn, ...args) => {
 const sum = curry(initialSum)
 
 console.log(sum(1, 2, 1)(2)(3)())
+console.log(sum(1)(2)(3)());
+console.log(sum(1)(2, 3)(4)(5, 6, 7)());
