@@ -1,6 +1,6 @@
 interface vNode {
   tag: string
-  props?: object
+  props?:  { [key: string]: string };
   children?: Array<vNode>
   text: string
 }

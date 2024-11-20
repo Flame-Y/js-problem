@@ -3,24 +3,24 @@ class EventEmitter {
     this.events = {}
   }
 
-  on(event, listener) {
+  on(event, fn) {
     if (this.events[event]) {
-      this.events[event].push(listener)
-    } else this.events[event] = [listener]
+      this.events[event].push(fn)
+    } else this.events[event] = [fn]
   }
 
-  off(event, listener) {
+  off(event, fn) {
     if (this.events[event]) {
       for (let i = 0; i < this.events[event].length; i++) {
-        if (this.events[event][i] === listener) this.events[event].splice(i, 1)
+        if (this.events[event][i] === fn) this.events[event].splice(i, 1)
       }
     }
   }
 
   emit(event, ...arg) {
     if (this.events[event]) {
-      this.events[event].forEach((listener) => {
-        listener(arg)
+      this.events[event].forEach((fn) => {
+        fn(arg)
       })
     }
   }
@@ -35,9 +35,9 @@ class EventEmitter {
     return this.events[event]
   }
 
-  once(event, listener) {
+  once(event, fn) {
     const onceListener = (...args) => {
-      listener(...args)
+      fn(...args)
       this.off(event, onceListener)
     }
     this.on(event, onceListener)

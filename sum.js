@@ -1,3 +1,5 @@
+// const initialSum = (a, b, c) => a + b + c;
+const initialSum = (...args) => args.reduce((acc, cur) => acc + cur, 0);
 // const curry = (fn, ...args) => {
 //   return (...more) => {
 //     if (more.length === 0) {
