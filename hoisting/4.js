@@ -6,9 +6,9 @@ function Foo() {
 Foo.getName = function () { console.log(3);}
 Foo.prototype.getName = function () { console.log(4);}
 
-getName();
-Foo().getName;
-Foo.getName();
-getName(); 
-(new Foo.getName());
-(new Foo()).getName();
+getName(); // 1
+Foo().getName(); // 2 node环境会报错
+Foo.getName(); // 3
+getName(); // 2
+(new Foo.getName()); // 3
+(new Foo()).getName(); // 4
